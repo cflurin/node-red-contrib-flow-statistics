@@ -1,5 +1,5 @@
 ### flow-statistic
-A simple node that outputs a flow-statistic:
+A simple node that outputs flow-statistics:
 
 * node-types
 * node-quantity
@@ -7,4 +7,4 @@ A simple node that outputs a flow-statistic:
 
 ### Installation
 
-Copy flow-statistics.js and flow-statistics.html in your user directory, typically `~/.node-red/nodes`.
+Copy `flow-statistics.js` and `flow-statistics.html` in your user directory, typically `~/.node-red/nodes`.
