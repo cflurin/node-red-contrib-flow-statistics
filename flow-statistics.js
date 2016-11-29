@@ -24,9 +24,14 @@ module.exports = function(RED) {
         }
     });
     
-    flow_stat.node_total = nodes;
+    flow_stat.Total = nodes;
     
-    msg.payload = flow_stat;
+    const ordered = {};
+    Object.keys(flow_stat).sort().forEach(function(key) {
+      ordered[key] = flow_stat[key];
+    });
+    
+    msg.payload = ordered;
      
     this.send(msg);
       
