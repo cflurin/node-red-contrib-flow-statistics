@@ -7,7 +7,7 @@ A simple node that outputs flow-statistics:
 
 ### Installation
 
-Copy `flow-statistics.js` and `flow-statistics.html` in the `nodes` directory, typically `~/.node-red/nodes`.
+Copy `flow-statistics.js` and `flow-statistics.html` in the `nodes` directory, typically `~/.node-red/nodes` and restart node-red.
 
 ###  Example
 
