@@ -7,9 +7,62 @@ A simple node that outputs flow-statistics:
 
 ### Installation
 
-Copy `flow-statistics.js` and `flow-statistics.html` in your user directory, typically `~/.node-red/nodes`.
+Copy `flow-statistics.js` and `flow-statistics.html` in the `nodes` directory, typically `~/.node-red/nodes`.
 
 ###  Example
+
+![fow-statistics](https://user-images.githubusercontent.com/5056710/29739495-b004a160-8a3f-11e7-9cd2-3fbfc1ff942d.jpeg)
+
+You can import the corresponding flow:
+```
+[
+    {
+        "id": "2a8bb9bd.7806f6",
+        "type": "flow-statistics",
+        "z": "eb273ea8.d5d53",
+        "name": "",
+        "x": 300,
+        "y": 60,
+        "wires": [
+            [
+                "f8c7193.19d86e8"
+            ]
+        ]
+    },
+    {
+        "id": "f8c7193.19d86e8",
+        "type": "debug",
+        "z": "eb273ea8.d5d53",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 530,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ea41b5ea.44d918",
+        "type": "inject",
+        "z": "eb273ea8.d5d53",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "2a8bb9bd.7806f6"
+            ]
+        ]
+    }
+]
+```
+A JavaScript object is displayed in the sidebar debug tab.
 
 ```sh
 {
