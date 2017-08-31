@@ -7,7 +7,9 @@ A simple node that outputs flow-statistics:
 
 ### Installation
 
-Copy `flow-statistics.js` and `flow-statistics.html` in the `nodes` directory, typically `~/.node-red/nodes` and restart node-red.
+Run the following command in your Node-RED user directory - typically `~/.node-red`
+
+    $ npm install node-red-contrib-flow-statistics
 
 ###  Example
 
