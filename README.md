@@ -1,6 +1,6 @@
 ### flow-statistic
 
-### predicated
+# >>> predicated
 
 Please, use the `dsm` node instead: [Statistic](https://github.com/cflurin/node-red-contrib-dsm/wiki/Statistic)
 
