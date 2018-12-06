@@ -1,15 +1,13 @@
 ### flow-statistic
+
+### predicated
+
+Please, use the `dsm` node instead: [Statistic](https://github.com/cflurin/node-red-contrib-dsm/wiki/Statistic)
+
 A simple node that outputs flow-statistics:
 
 * node-types
 * node-quantity
-
-
-### Installation
-
-Run the following command in your Node-RED user directory - typically `~/.node-red`
-
-    $ npm install node-red-contrib-flow-statistics
 
 ###  Example
 
