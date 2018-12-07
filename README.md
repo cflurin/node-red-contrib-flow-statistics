@@ -2,7 +2,64 @@
 
 # >>> deprecated
 
-Please, use the `dsm` node instead: [Statistic](https://github.com/cflurin/node-red-contrib-dsm/wiki/Statistic)
+Please, use the `dsm` node instead: [Flow statistics](Replacement for [node-red-contrib-flow-statistics](https://github.com/cflurin/node-red-contrib-flow-statistics)
+
+![statistic](https://user-images.githubusercontent.com/5056710/47963853-e7191480-e031-11e8-942a-a0bd164ed2ca.png)
+
+### Configuration
+
+```
+{
+    "currentState": "step1",
+    "states": {
+        "step1": {
+            "evaluate": "step2"
+        },
+        "step2": {
+            "sort": "step1"
+        }
+    },
+    "methods": {
+        "evaluate": [
+            "sm.flow_stat = {};",
+            "sm.flow_stat.Total = 0;",
+            "RED.nodes.eachNode(function(n) {",
+            "   if (typeof sm.flow_stat[n.type] === 'undefined') {",
+            "       sm.flow_stat[n.type] = 1;",
+            "   } else {",
+            "       sm.flow_stat[n.type]++;",
+            "   }",
+            "   if (n.type !== 'tab') {",
+            "       sm.flow_stat.Total++;",
+            "   }",
+            "});",
+            "resume('sort', msg);",
+            "output = false;"
+        ],
+        "sort": [
+            "const sorted = {};",
+            "Object.keys(sm.flow_stat).sort().forEach(function(key) {",
+            "   sorted[key] = sm.flow_stat[key];",
+            "});",
+            "msg.payload = sorted;"
+        ],        
+        "status": {
+            "fill": "blue",
+            "shape": "dot",
+            "text": {
+                "get": "'Total ' + sm.flow_stat.Total;"
+            }
+        }
+    }
+}
+
+```
+
+### Flow
+
+```
+[{"id":"686c4721.8bf198","type":"inject","z":"85cbcdb3.ef251","name":"evaluate","topic":"evaluate","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":100,"y":1180,"wires":[["cc449163.c20dc"]]},{"id":"cc449163.c20dc","type":"dsm","z":"85cbcdb3.ef251","name":"statistic","sm_config":"{\n    \"currentState\": \"step1\",\n    \"states\": {\n        \"step1\": {\n            \"evaluate\": \"step2\"\n        },\n        \"step2\": {\n            \"sort\": \"step1\"\n        }\n    },\n    \"methods\": {\n        \"evaluate\": [\n            \"sm.flow_stat = {};\",\n            \"sm.flow_stat.Total = 0;\",\n            \"RED.nodes.eachNode(function(n) {\",\n            \"   if (typeof sm.flow_stat[n.type] === 'undefined') {\",\n            \"       sm.flow_stat[n.type] = 1;\",\n            \"   } else {\",\n            \"       sm.flow_stat[n.type]++;\",\n            \"   }\",\n            \"   if (n.type !== 'tab') {\",\n            \"       sm.flow_stat.Total++;\",\n            \"   }\",\n            \"});\",\n            \"resume('sort', msg);\",\n            \"output = false;\"\n        ],\n        \"sort\": [\n            \"const sorted = {};\",\n            \"Object.keys(sm.flow_stat).sort().forEach(function(key) {\",\n            \"   sorted[key] = sm.flow_stat[key];\",\n            \"});\",\n            \"msg.payload = sorted;\"\n        ],        \n        \"status\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": {\n                \"get\": \"'Total ' + sm.flow_stat.Total;\"\n            }\n        }\n    }\n}\n","x":250,"y":1180,"wires":[["657d81fb.05084"]]},{"id":"657d81fb.05084","type":"debug","z":"85cbcdb3.ef251","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":410,"y":1180,"wires":[]}]
+```)
 
 A simple node that outputs flow-statistics:
 
