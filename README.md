@@ -4,8 +4,6 @@
 
 Please, use the `dsm` node instead: [Flow statistics](https://github.com/cflurin/node-red-contrib-dsm/wiki/Flow-statistics)
 
-![statistic](https://user-images.githubusercontent.com/5056710/47963853-e7191480-e031-11e8-942a-a0bd164ed2ca.png)
-
 A simple node that outputs flow-statistics:
 
 * node-types
