@@ -6,61 +6,6 @@ Please, use the `dsm` node instead: [Flow statistics](https://github.com/cflurin
 
 ![statistic](https://user-images.githubusercontent.com/5056710/47963853-e7191480-e031-11e8-942a-a0bd164ed2ca.png)
 
-### Configuration
-
-```
-{
-    "currentState": "step1",
-    "states": {
-        "step1": {
-            "evaluate": "step2"
-        },
-        "step2": {
-            "sort": "step1"
-        }
-    },
-    "methods": {
-        "evaluate": [
-            "sm.flow_stat = {};",
-            "sm.flow_stat.Total = 0;",
-            "RED.nodes.eachNode(function(n) {",
-            "   if (typeof sm.flow_stat[n.type] === 'undefined') {",
-            "       sm.flow_stat[n.type] = 1;",
-            "   } else {",
-            "       sm.flow_stat[n.type]++;",
-            "   }",
-            "   if (n.type !== 'tab') {",
-            "       sm.flow_stat.Total++;",
-            "   }",
-            "});",
-            "resume('sort', msg);",
-            "output = false;"
-        ],
-        "sort": [
-            "const sorted = {};",
-            "Object.keys(sm.flow_stat).sort().forEach(function(key) {",
-            "   sorted[key] = sm.flow_stat[key];",
-            "});",
-            "msg.payload = sorted;"
-        ],        
-        "status": {
-            "fill": "blue",
-            "shape": "dot",
-            "text": {
-                "get": "'Total ' + sm.flow_stat.Total;"
-            }
-        }
-    }
-}
-
-```
-
-### Flow
-
-```
-[{"id":"686c4721.8bf198","type":"inject","z":"85cbcdb3.ef251","name":"evaluate","topic":"evaluate","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":100,"y":1180,"wires":[["cc449163.c20dc"]]},{"id":"cc449163.c20dc","type":"dsm","z":"85cbcdb3.ef251","name":"statistic","sm_config":"{\n    \"currentState\": \"step1\",\n    \"states\": {\n        \"step1\": {\n            \"evaluate\": \"step2\"\n        },\n        \"step2\": {\n            \"sort\": \"step1\"\n        }\n    },\n    \"methods\": {\n        \"evaluate\": [\n            \"sm.flow_stat = {};\",\n            \"sm.flow_stat.Total = 0;\",\n            \"RED.nodes.eachNode(function(n) {\",\n            \"   if (typeof sm.flow_stat[n.type] === 'undefined') {\",\n            \"       sm.flow_stat[n.type] = 1;\",\n            \"   } else {\",\n            \"       sm.flow_stat[n.type]++;\",\n            \"   }\",\n            \"   if (n.type !== 'tab') {\",\n            \"       sm.flow_stat.Total++;\",\n            \"   }\",\n            \"});\",\n            \"resume('sort', msg);\",\n            \"output = false;\"\n        ],\n        \"sort\": [\n            \"const sorted = {};\",\n            \"Object.keys(sm.flow_stat).sort().forEach(function(key) {\",\n            \"   sorted[key] = sm.flow_stat[key];\",\n            \"});\",\n            \"msg.payload = sorted;\"\n        ],        \n        \"status\": {\n            \"fill\": \"blue\",\n            \"shape\": \"dot\",\n            \"text\": {\n                \"get\": \"'Total ' + sm.flow_stat.Total;\"\n            }\n        }\n    }\n}\n","x":250,"y":1180,"wires":[["657d81fb.05084"]]},{"id":"657d81fb.05084","type":"debug","z":"85cbcdb3.ef251","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":410,"y":1180,"wires":[]}]
-```)
-
 A simple node that outputs flow-statistics:
 
 * node-types
@@ -72,52 +17,7 @@ A simple node that outputs flow-statistics:
 
 You can import the corresponding flow:
 ```
-[
-    {
-        "id": "2a8bb9bd.7806f6",
-        "type": "flow-statistics",
-        "z": "eb273ea8.d5d53",
-        "name": "",
-        "x": 300,
-        "y": 60,
-        "wires": [
-            [
-                "f8c7193.19d86e8"
-            ]
-        ]
-    },
-    {
-        "id": "f8c7193.19d86e8",
-        "type": "debug",
-        "z": "eb273ea8.d5d53",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 530,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "ea41b5ea.44d918",
-        "type": "inject",
-        "z": "eb273ea8.d5d53",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 100,
-        "y": 60,
-        "wires": [
-            [
-                "2a8bb9bd.7806f6"
-            ]
-        ]
-    }
-]
+[{"id":"ce227c1f.85a53","type":"flow-statistics","z":"44d3f52b.35d17c","name":"","x":360,"y":100,"wires":[["8052547b.4205d8"]]},{"id":"8052547b.4205d8","type":"debug","z":"44d3f52b.35d17c","name":"","active":true,"console":"false","complete":"false","x":590,"y":100,"wires":[]},{"id":"c33dc1e8.5f447","type":"inject","z":"44d3f52b.35d17c","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"x":160,"y":100,"wires":[["ce227c1f.85a53"]]}]
 ```
 A JavaScript object is displayed in the sidebar debug tab.
 
